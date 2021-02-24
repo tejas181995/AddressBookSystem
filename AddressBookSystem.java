@@ -45,6 +45,18 @@ class AddressBookSystem {
         contactBook.get(index).values[field] = val;
     }
 
+    public void deleteContact(int index){
+        contactBook.remove(index);
+    }
+
+    public void printall(){
+        for(Contact a:contactBook){
+            System.out.println("------------------------------------------------");
+            a.printContact();
+        }
+        System.out.println("------------------------------------------------");
+
+    }
     public static void main(String[] args) {
         int  noOfContacts;
         int reply = 1;
@@ -64,7 +76,7 @@ class AddressBookSystem {
             // contact.printContact();
             addressBook.addContacts(contact);
         }
-        System.out.println("Enter Contact to be search");
+        System.out.println("Enter Contact to be edit");
         String searchName = sc.nextLine();
         present = addressBook.findContact(searchName);
         if(present >= 0){
@@ -86,7 +98,17 @@ class AddressBookSystem {
         }else{
             System.out.println("Contact not presnt");
         }
-        
+        sc.nextLine();
+        System.out.println("Enter contact Name to be deleted");
+        String deleteName = sc.nextLine();
+        present = addressBook.findContact(deleteName);
+        if(present >=0){
+            addressBook.getContact(present).printContact();
+            addressBook.deleteContact(present);
+            System.out.println("Contact Deleted successfully");
+        }else{
+            System.out.println("contact not found");
+        }
+        addressBook.printall();
     }
 }
-
