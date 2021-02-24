@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 class Contact{
     String firstName, lastName, address, city, state, zipCode, phoneNumber, email;
@@ -25,9 +26,18 @@ class Contact{
     }
 }
 class AddressBookSystem {
-  
+    ArrayList<Contact> contactBook = new ArrayList<Contact>();
+    
+    public int addContacts(Contact contact){
+        contactBook.add(contact);
+        contact.printContact();
+        return contactBook.size();
+
+
+    }
     public static void main(String[] args) {
         String firstName, lastName, address, city, state, zipCode, phoneNumber, email;
+        AddressBookSystem addressBook = new AddressBookSystem();
         System.out.println("Welcome to Address Book System");
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter first Name");
@@ -48,8 +58,8 @@ class AddressBookSystem {
         email = sc.nextLine();
 
         Contact contact = new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
-        contact.printContact();
-        
+        addressBook.addContacts(contact);
+
     }
 }
 
