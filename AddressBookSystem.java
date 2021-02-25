@@ -1,5 +1,7 @@
 import java.util.Scanner;
+import java.util.Map.Entry;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 class Contact {
     public static final String[] fields = new String[] { "firstName", "lastName", "address", "city", "state", "zipCode",
@@ -23,7 +25,7 @@ class AddressBookSystem {
 
     ArrayList<Contact> contactBook = new ArrayList<Contact>();
     public static AddressBookSystem addressBook = new AddressBookSystem();
-
+    public static HashMap<String, AddressBookSystem> addressBooks = new HashMap<>();
 
     public int addContacts(Contact contact) {
         contactBook.add(contact);
@@ -122,17 +124,29 @@ class AddressBookSystem {
 
     }
 
-    
+    public static void addAddressBook(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter name of new address book");
+        String name = sc.nextLine() ;
+        addressBook  = new AddressBookSystem();
+        addressBooks.put(name, addressBook) ;
+        System.out.println("New addressbook added ");       
+             
+    }
     public static void main(String[] args) {
+        addressBooks.put("default", addressBook);
         int choice = 0;
         Scanner sc = new Scanner(System.in);
 
         while(choice != 5){
-            System.out.println("1. Add contact \n2. Edit contact \n3.delete contact \n4. view all contacts. \n5. Exit");
+            System.out.println("0.Add Address book \n1. Add contact \n2. Edit contact \n3.delete contact \n4. view all contacts. \n5. Exit");
             System.out.print("\nEnter choice: ");
             choice = sc.nextInt();
 
             switch(choice){
+                case 0:
+                    addAddressBook();
+                    break;
                 case 1:
                     addEntries();
                     break;
